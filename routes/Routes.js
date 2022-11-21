@@ -2,7 +2,7 @@ const express = require("express");
 const routes = express.Router();
 
 // ROUTES
-routes.get('/', async (req, res) => {
+routes.get('/',  (req, res) => {
     try {
         res.render( "index")
     } catch (error) {
