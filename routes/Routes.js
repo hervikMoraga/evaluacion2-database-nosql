@@ -14,7 +14,7 @@ routes.get('/', async (req, res) => {
     }
 })
 
-routes.get('/estudiantes', async (req, res) => {
+routes.get('/', async (req, res) => {
     try {
         res.render( "estudiantes")
     } catch (error) {
