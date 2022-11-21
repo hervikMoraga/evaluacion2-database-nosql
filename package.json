@@ -1,0 +1,24 @@
+{
+  "name": "ev2_db_nosql",
+  "version": "1.0.0",
+  "description": "CRUD realizado para Ev2_db_NOSQL",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CRUD",
+    "CREATE",
+    "QUERYS",
+    "JS",
+    "MONGO"
+  ],
+  "author": "Hervik Moraga",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongodb": "^4.12.0"
+  }
+}
