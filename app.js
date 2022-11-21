@@ -1,6 +1,27 @@
+require('dotenv').config()
+
 const express = require("express");
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
 const app = express();
-const port = 3000
+const PORT = process.env.PORT || 4000;
+
+
+app.use(bodyParser.urlencoded({extended:false})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
+
+
+// CONEXION A BASE DE DATOS
+const USERNAME = process.env.USER_NAME
+const PASS = process.env.PASSW
+const DB_NAME = process.env.DB_NAME
+const URI = `mongodb+srv://${USERNAME}:${PASS}@cluster0.ymuxfkp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
+
+mongoose.connect( URI, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then( () => console.log("Conexión establecida con MongoDB"))
+  .catch(e => console.log(e))
+  
 
 
 // MOTOR DE PLANTILLAS
@@ -8,26 +29,17 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views')
 
 
-// ROUTES
-app.get('/', (req, res) =>{
-  res.render("index", {titulo : "Titulo dinamico"})
-})
-
-
-
-app.get('/services', (req, res) =>{
-  res.send("Servicios")
-})
-
-
 // MIDDLEWARES
 app.use(express.static(__dirname + '/public'))
+
+app.use('/', require('./routes/Routes'))
+
 app.use((req, res, next) =>{
   res.status(404).render(__dirname+"/views/404")
 })
 
-
-app.listen(port, () =>{
-  console.log("Servidor a su servicio en el puerto: ", port)
+// SERVIDOR EN ESCUCHA
+app.listen(PORT, () =>{
+  console.log("Servidor a su servicio en el puerto: ", PORT)
 })
 

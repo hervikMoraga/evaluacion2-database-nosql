@@ -4,7 +4,8 @@
   "description": "CRUD realizado para Ev2_db_NOSQL",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app",
+    "dev": "nodemon app"
   },
   "keywords": [
     "CRUD",
@@ -16,9 +17,11 @@
   "author": "Hervik Moraga",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.20.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
-    "mongodb": "^4.12.0"
+    "mongodb": "^4.12.0",
+    "mongoose": "^6.7.2"
   }
 }
