@@ -18,6 +18,7 @@ app.use(bodyParser.json()); // parse application/json
 const USERNAME = "userEv2"
 const PASS = "I58ZfpIZEkJI3PXb"
 const DB_NAME = "universidad"
+const PORT = process.env.PORT || 4000
 const URI = `mongodb+srv://${USERNAME}:${PASS}@cluster0.ymuxfkp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
 
 mongoose.connect( URI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -42,7 +43,7 @@ app.use((req, res, next) =>{
 })
 
 // SERVIDOR EN ESCUCHA
-app.listen(process.env.PORT || 4000, () =>{
+app.listen(PORT, () =>{
   console.log("Servidor a su servicio en el puerto: ", PORT)
 })
 
