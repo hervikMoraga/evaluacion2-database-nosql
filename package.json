@@ -4,7 +4,7 @@
   "description": "CRUD realizado para Ev2_db_NOSQL",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
+    "start": "node app.js",
     "dev": "nodemon app"
   },
   "keywords": [
