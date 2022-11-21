@@ -32,6 +32,7 @@ app.set('views', __dirname + '/views')
 // MIDDLEWARES
 app.use(express.static(__dirname + '/public'))
 
+app.use('/estudiantes', require('./routes/Estudiantes'))
 app.use('/', require('./routes/Routes'))
 
 app.use((req, res, next) =>{
