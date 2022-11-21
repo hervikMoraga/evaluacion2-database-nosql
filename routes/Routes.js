@@ -6,25 +6,33 @@ const Estudiante = require('../models/estudiante')
 
 // ROUTES
 
-// OBTENER TODOS LOS ESTUDIANTES
 routes.get('/', async (req, res) => {
     try {
-        const arrayEstudiantesDB = await Estudiante.find()
-        res.render( "index", { arrayEstudiantes: arrayEstudiantesDB })
+        res.render( "index")
     } catch (error) {
         console.log("Ha ocurrido un error => ",error)
     }
 })
 
-// CREAR ESTUDIANTE
-routes.post('/', async(req, res) =>{
+// OBTENER TODOS LOS ESTUDIANTES
+routes.get('/estudiantes', async (req, res) => {
+    try {
+        const arrayEstudiantesDB = await Estudiante.find()
+        res.render( "estudiantes", { arrayEstudiantes: arrayEstudiantesDB })
+    } catch (error) {
+        console.log("Ha ocurrido un error => ",error)
+    }
+})
+
+// CREAR ESTUDIANTE LISTO
+routes.post('/estudiantes', async(req, res) =>{
     const body = req.body
     try {
         const estudianteDB = new Estudiante(body)
         await estudianteDB.save()
 
         // console.log("Estudiante creado: ",estudianteDB)
-        res.redirect('/')
+        res.redirect('/estudiantes')
     } catch (error) {
         console.log("Ha ocurrido un error al crear un estudiante")
     }
@@ -32,11 +40,14 @@ routes.post('/', async(req, res) =>{
 
 
 // EDITAR ESTUDIANTE
-routes.put('/:id', async(req,res) =>{
+routes.put('/estudiantes/:id', async(req,res) =>{
+
+console.log("LLEGOOOOOO");
+
     const id = req.params.id
     const body = req.body
     try {
-        
+        // const estudianteDB = await Estudiante.findByIdAndUpdate(id, body );
         const estudianteDB = await Estudiante.findByIdAndUpdate(id, body, {useFindAndModify: false} );
         console.log(estudianteDB)
 
@@ -57,9 +68,8 @@ routes.put('/:id', async(req,res) =>{
 })
 
 
-
-// ELIMINAR ESTUDIANTE
-routes.delete( '/:id', async (req,res) =>{
+// ELIMINAR ESTUDIANTE LISTO
+routes.delete( '/estudiantes/:id', async (req,res) =>{
     const id = req.params.id
     try {
         const estudianteDB = await Estudiante.findByIdAndDelete({_id:id})
@@ -82,8 +92,8 @@ routes.delete( '/:id', async (req,res) =>{
 })
 
 
-// OBTENER INF DE ESTUDIANTE ESPECIFICO
-routes.get( '/:id', async (req,res) =>{
+// OBTENER INF DE ESTUDIANTE ESPECIFICO LISTO
+routes.get( '/estudiantes/:id', async (req,res) =>{
     const id = req.params.id
     try {
         const estudianteDB = await Estudiante.findById({_id:id})

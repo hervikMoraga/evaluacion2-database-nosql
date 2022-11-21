@@ -1,0 +1,322 @@
+<%- include("template/header") %>
+
+<!-- TITTLE -->
+<h1
+  class="display-5 text-center text-secondary"
+  style="margin-top: 30px; margin-bottom: 10px"
+>
+  Lista de estudiantes
+</h1>
+
+<button
+  class="btn btn-secondary active text-center"
+  type="button"
+  data-bs-toggle="modal"
+  data-bs-target="#modal_create_student"
+  style="
+    width: 182.5px;
+    padding: 8px 12px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 10px;
+  "
+>
+  Agregar estudiante
+</button>
+
+<!-- MODAL CREATE STUDENT -->
+<div class="modal fade" role="dialog" tabindex="-1" id="modal_create_student">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-secondary">Crear estudiante</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <section class="position-relative py-4 py-xl-5">
+          <!-- FORMULARIO -->
+          <form method="POST" action="/estudiantes">
+            <div class="mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="txtnombre"
+                name="nombre"
+                placeholder="Nombre"
+                autocomplete="on"
+                required
+                minlength="5"
+                maxlength="50"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="txtcarrera"
+                name="carrera"
+                placeholder="Carrera"
+                autocomplete="on"
+                autofocus=""
+                required
+                minlength="5"
+                maxlength="50"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                class="form-control"
+                id="txtnacimiento"
+                name="fecha_nacimiento"
+                type="date"
+              />
+            </div>
+
+            <div class="modal-footer">
+              <button
+                class="btn btn-light"
+                type="button"
+                data-bs-dismiss="modal"
+              >
+                Cancelar</button
+              >
+              <button class="btn btn-primary text-bg-secondary" type="submit">
+                Agregar
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDIT STUDENT -->
+<div class="modal fade" role="dialog" tabindex="-1" id="modal_edit_student">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-secondary">Editar estudiante</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <section class="position-relative py-4 py-xl-5">
+
+         <!-- FORMULARIO -->
+          <form method="put"  >
+            <div class="mb-3">
+              <p><b class="text-secondary">ID: </b> <span id="idEditar" class="text-secondary"></span> </p>
+              <input
+                class="form-control"
+                type="text"
+                id="nombreEditar"
+                name="name"
+                placeholder="Nombre"
+                autocomplete="on"
+                required=""
+                minlength="5"
+                maxlength="50"
+              />
+            </div>
+            <div class="mb-3">
+              <input
+                class="form-control"
+                type="text"
+                id="carreraEditar"
+                name="career"
+                placeholder="Carrera"
+                autocomplete="on"
+                autofocus=""
+                required=""
+                minlength="5"
+                maxlength="50"
+              />
+            </div>
+
+            <div class="mb-3"><input class="form-control" type="date" id="nacimientoEditar" /></div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">
+                Cancelar</button>
+                <button class="btn btn-primary text-bg-secondary" type="submit" id="btnEdit">
+                Editar
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETAIL STUDENT -->
+<div class="modal fade" role="dialog" tabindex="-1" id="modal_detail_student">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-secondary">Detalles del estudiante</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <section class="position-relative py-4 py-xl-5">
+            <div class="mb-3">
+              <p><b class="text-secondary">ID: </b> <span id="idDetalle" class="text-secondary"></span> </p>
+            </div>
+            <div class="mb-3">
+              <p><b class="text-secondary">Nombre: </b><span id="nombreDetalle" class="text-secondary"></span></p>
+            </div>
+            <div class="mb-3">
+              <p><b class="text-secondary">Carrera: </b> <span id="carreraDetalle" class="text-secondary"></span></p>
+            </div>
+            <div class="mb-3">
+              <p><b class="text-secondary">Fecha de nacimiento: </b> <span id="nacimientoDetalle" class="text-secondary"></span></p>
+            </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" type="button" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE STUDENT -->
+<div
+  class="table-responsive"
+  style="margin-top: 15px; margin-right: 10px; margin-left: 11px"
+>
+  <table class="table table-bordered">
+    <thead class="text-center text-bg-secondary">
+      <tr>
+        <th class="text-start" style="padding-right: 0px">ID estudiante</th>
+        <th class="text-start">Nombre</th>
+        <th class="text-start">Fecha de nacimiento</th>
+        <th class="text-start">Carrera</th>
+        <th class="text-center">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% if (arrayEstudiantes.length> 0) { %> 
+         <% arrayEstudiantes.forEach(es=> { %>
+
+      <tr>
+        <td><%= es._id %></td>
+        <td><%= es.nombre %></td>
+        <td>
+          <%= //es.fecha_nacimiento.getFullYear() + "-" +
+          //(es.fecha_nacimiento.getMonth()+1) + "-" +
+          // es.fecha_nacimiento.getDate() ; 
+          es.fecha_nacimiento.toLocaleDateString("es-CL", {
+              timeZone: "America/Santiago",
+              weekday: "long", // narrow, short
+              year: "numeric", // 2-digit
+              month: "short", // numeric, 2-digit, narrow, long
+              day: "numeric" // 2-digit
+          });
+          %>
+        </td>
+        <td><%= es.carrera %></td>
+
+        <td class="text-center">
+          &nbsp;
+
+          <!-- EDITAR -->
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modal_edit_student"
+            onclick="editEstudiante('<%= es._id %>')"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pencil-square"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+              />
+            </svg>
+          </button>
+
+          <!-- DETALLES -->
+          <button
+            class="btn btn-success"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#modal_detail_student"
+            onclick="getEstudiante('<%= es._id %>')"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-eye"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+              />
+              <path
+                d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+              />
+            </svg>
+          </button>
+          
+          <!-- ELIMINAR -->
+          <button class="btn btn-danger" type="button" id="btnEliminar" onclick="eliminarEstudiante('<%= es._id %>')" >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-trash"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+              />
+            </svg>
+          </button>
+        </td>
+      </tr>
+
+      <% })} %>
+
+    </tbody>
+  </table>
+</div>
+
+<%- include("template/footer") %>
+
