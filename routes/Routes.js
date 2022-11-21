@@ -14,6 +14,15 @@ routes.get('/', async (req, res) => {
     }
 })
 
+routes.get('/estudiantes', async (req, res) => {
+    try {
+        res.render( "estudiantes")
+    } catch (error) {
+        console.log("Ha ocurrido un error => ",error)
+    }
+})
+
+
 // OBTENER TODOS LOS ESTUDIANTES
 routes.get('/estudiantes', async (req, res) => {
     try {
@@ -41,8 +50,6 @@ routes.post('/estudiantes', async(req, res) =>{
 
 // EDITAR ESTUDIANTE
 routes.put('/estudiantes/:id', async(req,res) =>{
-
-console.log("LLEGOOOOOO");
 
     const id = req.params.id
     const body = req.body
