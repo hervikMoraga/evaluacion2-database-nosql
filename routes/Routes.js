@@ -10,13 +10,7 @@ routes.get('/', async (req, res) => {
     }
 })
 
-routes.get('/estudiantes', async (req, res) => {
-    try {
-        res.render( "estudiantes")
-    } catch (error) {
-        console.log("Ha ocurrido un error => ",error)
-    }
-})
+
 
 
 
