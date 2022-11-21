@@ -111,12 +111,15 @@
       </div>
       <div class="modal-body">
         <section class="position-relative py-4 py-xl-5">
-          <form method="post">
+
+         <!-- FORMULARIO -->
+          <form method="PUT" >
             <div class="mb-3">
+              <p><b class="text-secondary">ID: </b> <span id="idEditar" class="text-secondary"></span> </p>
               <input
                 class="form-control"
                 type="text"
-                id="name-3"
+                id="nombreEditar"
                 name="name"
                 placeholder="Nombre"
                 autocomplete="on"
@@ -129,7 +132,7 @@
               <input
                 class="form-control"
                 type="text"
-                id="name-4"
+                id="carreraEditar"
                 name="career"
                 placeholder="Carrera"
                 autocomplete="on"
@@ -139,19 +142,18 @@
                 maxlength="50"
               />
             </div>
-            <div class="mb-3"><input class="form-control" type="date" /></div>
-            <div class="mb-3"></div>
-            <div></div>
+            <div class="mb-3"><input class="form-control" type="date" id="nacimientoEditar" /></div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">
+                Cancelar</button
+              ><button class="btn btn-primary text-bg-secondary" type="submit" id="btnEdit">
+                Editar
+              </button>
+            </div>
           </form>
         </section>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-light" type="button" data-bs-dismiss="modal">
-          Cancelar</button
-        ><button class="btn btn-primary text-bg-secondary" type="button">
-          Editar
-        </button>
-      </div>
+
     </div>
   </div>
 </div>
@@ -218,9 +220,17 @@
         <td><%= es._id %></td>
         <td><%= es.nombre %></td>
         <td>
-          <%= es.fecha_nacimiento.getFullYear() + "-" +
-          (es.fecha_nacimiento.getMonth()+1) + "-" +
-          es.fecha_nacimiento.getDate() ; %>
+          <%= //es.fecha_nacimiento.getFullYear() + "-" +
+          //(es.fecha_nacimiento.getMonth()+1) + "-" +
+          // es.fecha_nacimiento.getDate() ; 
+          es.fecha_nacimiento.toLocaleDateString("es-CL", {
+              timeZone: "America/Santiago",
+              weekday: "long", // narrow, short
+              year: "numeric", // 2-digit
+              month: "short", // numeric, 2-digit, narrow, long
+              day: "numeric" // 2-digit
+          });
+          %>
         </td>
         <td><%= es.carrera %></td>
 

@@ -32,26 +32,29 @@ routes.post('/', async(req, res) =>{
 
 
 // EDITAR ESTUDIANTE
-// routes.get('/:id', async(req,res) =>{
-//     const id = req.params.id
-//     try {
+routes.put('/:id', async(req,res) =>{
+    const id = req.params.id
+    const body = req.body
+    try {
         
-//         const estudianteDB = await Estudiante.findOne({_id:id})
-//         console.log(estudianteDB)
+        const estudianteDB = await Estudiante.findByIdAndUpdate(id, body, {useFindAndModify: false} );
+        console.log(estudianteDB)
 
-//         res.render('detalle',{
-//             estudiante: estudianteDB,
-//             error:false
-//         })
+        res.json({
+            estudiante: estudianteDB,
+            estado:true,
+            msge: "Editado!"
+        })
 
-//     } catch (error) {
-//         console.log("Ha ocurrido un error al obtener el estudiante")
-//         res.render('detalle',{
-//             error:true,
-//             msge: "No se encuentra el id seleccionado"
-//         })
-//     }
-// })
+
+    } catch (error) {
+        console.log("Ha ocurrido un error al editar el estudiante")
+        res.json({
+            estado:false,
+            msge: "Error"
+        })
+    }
+})
 
 
 
