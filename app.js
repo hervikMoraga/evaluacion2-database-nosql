@@ -5,7 +5,6 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
 
 app.use(bodyParser.urlencoded({extended:false})); // parse application/x-www-form-urlencoded
@@ -43,7 +42,7 @@ app.use((req, res, next) =>{
 })
 
 // SERVIDOR EN ESCUCHA
-app.listen(PORT, () =>{
+app.listen(process.env.PORT || 4000, () =>{
   console.log("Servidor a su servicio en el puerto: ", PORT)
 })
 
