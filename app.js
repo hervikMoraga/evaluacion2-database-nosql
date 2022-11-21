@@ -12,12 +12,9 @@ app.use(bodyParser.json()); // parse application/json
 
 
 // CONEXION A BASE DE DATOS
-// const USERNAME = process.env.USER_NAME
-// const PASS = process.env.PASSW
-// const DB_NAME = process.env.DB_NAME
-const USERNAME = "userEv2"
-const PASS = "I58ZfpIZEkJI3PXb"
-const DB_NAME = "universidad"
+const USERNAME = process.env.USER_NAME
+const PASS = process.env.PASSW
+const DB_NAME = process.env.DB_NAME
 const PORT = process.env.PORT || 4000
 const URI = `mongodb+srv://${USERNAME}:${PASS}@cluster0.ymuxfkp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`
 
